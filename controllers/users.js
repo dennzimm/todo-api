@@ -11,7 +11,14 @@ router.post('/', (req, res) => {
 
   user
     .save()
-    .then(user => res.send(`User was created: ${user}`))
+    .then(() => {
+      return user.generateAuthToken();
+    })
+    .then(token => {
+      res
+        .header('x-auth', token)
+        .send(user);
+    })
     .catch(error => res.status(400).send(error));
 });
 
