@@ -17,6 +17,7 @@
         "vars": "local",
         "args": "none"
       }
-    ]
+    ],
+    "comma-dangle": "off"
   }
 }
