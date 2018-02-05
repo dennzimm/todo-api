@@ -18,6 +18,9 @@
         "args": "none"
       }
     ],
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "func-names": "off",
+    "no-underscore-dangle": "off",
+    "quote-props": "off"
   }
 }
