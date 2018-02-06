@@ -3,12 +3,18 @@ const { ObjectID } = require('mongodb');
 const { pick, isBoolean } = require('lodash');
 
 const { Todo } = require('./../models/todo');
+const { authenticate } = require('./../middlewares/authenticate');
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
+router.post('/', authenticate, (req, res) => {
   const body = pick(req.body, ['text']);
-  const todo = new Todo(body);
+  const user = pick(req.user, ['_id']);
+
+  const todo = new Todo({
+    _creator: user._id,
+    text: body.text
+  });
 
   todo
     .save()
@@ -16,8 +22,11 @@ router.post('/', (req, res) => {
     .catch(error => res.status(400).send(error));
 });
 
-router.get('/', (req, res) => {
-  Todo.find()
+router.get('/', authenticate, (req, res) => {
+  Todo
+    .find({
+      _creator: req.user._id
+    })
     .then(todos => {
       res.send({ todos });
     })
@@ -26,7 +35,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticate, (req, res) => {
   const { id } = req.params;
   const isValidID = ObjectID.isValid(id);
 
@@ -34,7 +43,11 @@ router.get('/:id', (req, res) => {
     return res.status(404).send();
   }
 
-  Todo.findById(id)
+  Todo
+    .findOne({
+      _id: id,
+      _creator: req.user._id
+    })
     .then(todo => {
       if (!todo) {
         return res.sendStatus(404);
@@ -45,7 +58,7 @@ router.get('/:id', (req, res) => {
     .catch(error => res.status(400).send());
 });
 
-router.patch('/:id', (req, res) => {
+router.patch('/:id', authenticate, (req, res) => {
   const { id } = req.params;
   const isValidID = ObjectID.isValid(id);
   const body = pick(req.body, ['text', 'completed']);
@@ -62,7 +75,10 @@ router.patch('/:id', (req, res) => {
     body.completedAt = null;
   }
 
-  Todo.findByIdAndUpdate(id, { $set: body }, { new: true })
+  Todo.findOneAndUpdate({
+    _id: id,
+    _creator: req.user._id
+  }, { $set: body }, { new: true })
     .then(todo => {
       if (!todo) {
         return res.status(404).send();
@@ -73,7 +89,7 @@ router.patch('/:id', (req, res) => {
     .catch(error => res.status(400).send());
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authenticate, (req, res) => {
   const { id } = req.params;
   const isValidID = ObjectID.isValid(id);
 
@@ -81,7 +97,11 @@ router.delete('/:id', (req, res) => {
     return res.status(404).send();
   }
 
-  Todo.findByIdAndRemove(id)
+  Todo
+    .findOneAndRemove({
+      _id: id,
+      _creator: req.user._id
+    })
     .then(todo => {
       if (!todo) {
         return res.status(404).send();
