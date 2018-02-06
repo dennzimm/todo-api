@@ -17,7 +17,7 @@
 					},
 					{
 						"key": "x-auth",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTc5N2YxZjgwNzM3MTg1YjkxZTZhNzciLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTE3OTExODM5fQ.c-w4kLAdVXXFIj5VFDoJaj5J27nbe3o3B64fE4Mt8Ao"
+						"value": "{{x-auth}}"
 					}
 				],
 				"body": {
@@ -39,6 +39,19 @@
 		},
 		{
 			"name": "POST /todos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4e63fe6b-c7bf-4e45-8a2a-1519a2364fb7",
+						"type": "text/javascript",
+						"exec": [
+							"var body = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable('todoId', body._id);"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -48,7 +61,7 @@
 					},
 					{
 						"key": "x-auth",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTc5N2YxZjgwNzM3MTg1YjkxZTZhNzciLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTE3OTExODM5fQ.c-w4kLAdVXXFIj5VFDoJaj5J27nbe3o3B64fE4Mt8Ao"
+						"value": "{{x-auth}}"
 					}
 				],
 				"body": {
@@ -76,6 +89,10 @@
 					{
 						"key": "Content-Type",
 						"value": "application/json"
+					},
+					{
+						"key": "x-auth",
+						"value": "{{x-auth}}"
 					}
 				],
 				"body": {
@@ -83,13 +100,13 @@
 					"raw": "{\n\t\"text\": \"Learn something\"\n}"
 				},
 				"url": {
-					"raw": "{{url}}/todos/5a76d6f4be9fdbf7508b534f",
+					"raw": "{{url}}/todos/{{todoId}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"todos",
-						"5a76d6f4be9fdbf7508b534f"
+						"{{todoId}}"
 					]
 				},
 				"description": ""
@@ -104,6 +121,10 @@
 					{
 						"key": "Content-Type",
 						"value": "application/json"
+					},
+					{
+						"key": "x-auth",
+						"value": "{{x-auth}}"
 					}
 				],
 				"body": {
@@ -111,13 +132,13 @@
 					"raw": "{\n\t\"text\": \"Learn something\"\n}"
 				},
 				"url": {
-					"raw": "{{url}}/todos/5a773598f76c1daa5dc7bbcf",
+					"raw": "{{url}}/todos/{{todoId}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"todos",
-						"5a773598f76c1daa5dc7bbcf"
+						"{{todoId}}"
 					]
 				},
 				"description": ""
@@ -132,6 +153,10 @@
 					{
 						"key": "Content-Type",
 						"value": "application/json"
+					},
+					{
+						"key": "x-auth",
+						"value": "{{x-auth}}"
 					}
 				],
 				"body": {
@@ -139,13 +164,13 @@
 					"raw": "{\n\t\"text\": \"Some other text (update)\",\n\t\"completed\": false\n}"
 				},
 				"url": {
-					"raw": "{{url}}/todos/5a781800cb979b61e121e805",
+					"raw": "{{url}}/todos/{{todoId}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"todos",
-						"5a781800cb979b61e121e805"
+						"{{todoId}}"
 					]
 				},
 				"description": ""
@@ -154,6 +179,19 @@
 		},
 		{
 			"name": "POST /users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2587afb9-08e4-4bfb-963a-94ac21459ffe",
+						"type": "text/javascript",
+						"exec": [
+							"var token = postman.getResponseHeader('x-auth');",
+							"postman.setEnvironmentVariable('x-auth', token);"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -164,7 +202,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"me@example.com\",\n\t\"password\": \"123456\"\n}"
+					"raw": "{\n\t\"email\": \"me12@example.com\",\n\t\"password\": \"123456\"\n}"
 				},
 				"url": {
 					"raw": "{{url}}/users",
@@ -190,7 +228,7 @@
 					},
 					{
 						"key": "x-auth",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTc5NzdmOTcxM2JmZDg0NzU2ZWYxMDIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTE3OTEwMjI3fQ.ZG3NSFZBmRC6dEWj7anpB9KEmSVUfJlDJus6El2YZ5M"
+						"value": "{{x-auth}}"
 					}
 				],
 				"body": {
@@ -223,7 +261,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"me@example.com\",\n\t\"password\": \"123456\"\n}"
+					"raw": "{\n\t\"email\": \"me12@example.com\",\n\t\"password\": \"123456\"\n}"
 				},
 				"url": {
 					"raw": "{{url}}/users/login",
@@ -250,7 +288,7 @@
 					},
 					{
 						"key": "x-auth",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTc5NzdmOTcxM2JmZDg0NzU2ZWYxMDIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTE3OTEwMTQ0fQ.ZCNkKPkf_kU10eIo_Qrsju55u954_HyCkaDKH9Q-0lM"
+						"value": "{{x-auth}}"
 					}
 				],
 				"body": {
