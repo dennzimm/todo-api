@@ -88,8 +88,10 @@ describe('USERS', () => {
 
           User.findById(users[1]._id)
             .then(user => {
-              expect(user.tokens[1].access).toBe('auth');
-              expect(user.tokens[1].token).toBe(res.headers['x-auth']);
+              expect(user.toObject().tokens[1]).toMatchObject({
+                access: 'auth',
+                token: res.headers['x-auth']
+              });
               done();
             })
             .catch(error => {
