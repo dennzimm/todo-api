@@ -16,11 +16,24 @@ router.post('/', (req, res) => {
       return user.generateAuthToken();
     })
     .then(token => {
-      res
-        .header('x-auth', token)
-        .send(user);
+      res.header('x-auth', token).send(user);
     })
     .catch(error => res.status(400).send(error));
+});
+
+router.post('/login', (req, res) => {
+  const body = pick(req.body, ['email', 'password']);
+
+  User.findByCredentials(body.email, body.password)
+    .then(user => {
+      return user.generateAuthToken()
+        .then(token => {
+          res.header('x-auth', token).send(user);
+        });
+    })
+    .catch(error => {
+      res.status(400).send();
+    });
 });
 
 router.get('/me', authenticate, (req, res) => res.send(req.user));
