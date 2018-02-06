@@ -1,0 +1,276 @@
+{
+	"info": {
+		"name": "TodoApp",
+		"_postman_id": "1475b6cd-088b-38e5-01ba-c2f5d54037ed",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /todos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTc5N2YxZjgwNzM3MTg1YjkxZTZhNzciLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTE3OTExODM5fQ.c-w4kLAdVXXFIj5VFDoJaj5J27nbe3o3B64fE4Mt8Ao"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"text\": \"Learn something\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/todos",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"todos"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST /todos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTc5N2YxZjgwNzM3MTg1YjkxZTZhNzciLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTE3OTExODM5fQ.c-w4kLAdVXXFIj5VFDoJaj5J27nbe3o3B64fE4Mt8Ao"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"text\": \"Todo text from Postman\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/todos",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"todos"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET /todos/:id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"text\": \"Learn something\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/todos/5a76d6f4be9fdbf7508b534f",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"todos",
+						"5a76d6f4be9fdbf7508b534f"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /todos/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"text\": \"Learn something\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/todos/5a773598f76c1daa5dc7bbcf",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"todos",
+						"5a773598f76c1daa5dc7bbcf"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH /todos/:id",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"text\": \"Some other text (update)\",\n\t\"completed\": false\n}"
+				},
+				"url": {
+					"raw": "{{url}}/todos/5a781800cb979b61e121e805",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"todos",
+						"5a781800cb979b61e121e805"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST /users",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"me@example.com\",\n\t\"password\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST /users/me",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTc5NzdmOTcxM2JmZDg0NzU2ZWYxMDIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTE3OTEwMjI3fQ.ZG3NSFZBmRC6dEWj7anpB9KEmSVUfJlDJus6El2YZ5M"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"test11211@example.com\",\n\t\"password\": \"password!\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/users/me",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"me"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST /users/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"me@example.com\",\n\t\"password\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/users/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /users/me/token",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTc5NzdmOTcxM2JmZDg0NzU2ZWYxMDIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTE3OTEwMTQ0fQ.ZCNkKPkf_kU10eIo_Qrsju55u954_HyCkaDKH9Q-0lM"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/users/me/token",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"me",
+						"token"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
