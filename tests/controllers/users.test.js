@@ -149,4 +149,39 @@ describe('USERS', () => {
         .end(done);
     });
   });
+
+  describe('DELETE /users/me/token', () => {
+    it('should logout user and remove auth token', done => {
+      request(app)
+        .delete('/users/me/token')
+        .set('x-auth', users[0].tokens[0].token)
+        .expect(200)
+        .expect(res => {
+          expect(res.headers['x-auth']).toBeUndefined();
+        })
+        .end((err, res) => {
+          if (err) {
+            done(err);
+          }
+
+          User.findById(users[0]._id)
+            .then(user => {
+              expect(user.tokens.length).toBe(0);
+              done();
+            })
+            .catch(error => {
+              done(error);
+            });
+        });
+    });
+  });
+
+  describe('DELETE /users/me/token', () => {
+    it('should return 401 if unauthorized try to logout', done => {
+      request(app)
+        .delete('/users/me/token')
+        .expect(401)
+        .end(done);
+    });
+  });
 });
