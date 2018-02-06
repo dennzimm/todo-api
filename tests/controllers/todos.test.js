@@ -132,6 +132,7 @@ describe('TODOS', () => {
           expect(res.body.todo.text).toBe(body.text);
           expect(res.body.todo.completed).toBeTruthy();
           expect(res.body.todo.completedAt).toBeTruthy();
+          expect(typeof res.body.todo.completedAt).toBe('number');
         })
         .end(done);
     });
